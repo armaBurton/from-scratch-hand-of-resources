@@ -43,4 +43,19 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expectArrObj);
   });
 
+  it('should return a motorcycle object with the matching id', async () => {
+    const expectObj = {
+      id: expect.any(String),
+      manufacturer: 'KTM',
+      name: '300XC-W',
+      cost: 10499,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/09_KTM300-XC-W-TPI.jpg'
+    }
+
+    const res = await request(app)
+      .get('/api/v1/two_strokes/2');
+
+    expect(res.body).toEqual(expectObj);
+  });
+
 });
