@@ -80,4 +80,33 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual(expectObj);
   });
+
+  it('should modify a motorcycle object with the matching ID', async () => {
+    const expectObj = {
+      id: expect.any(String),
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+
+    const sendObj = {
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+
+
+    const res = await request(app)
+      .patch('/api/v1/two_strokes/1')
+      .send(sendObj);
+
+    expect(res.body).toEqual(expectObj);
+  });
+
+  it('should delete a motorcycle object that matches the ID', async () => {
+    const res = await request(app)
+      .delete('/api/v1/two_strokes/1');
+  });
 });
