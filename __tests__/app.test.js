@@ -13,17 +13,71 @@ describe('alchemy-app routes', () => {
     pool.end();
   });
 
-  it('it should return a string', async () => {
+  // it('it should return a string', async () => {
+  //   const res = await request(app)
+  //     .get('/api/v1/two_strokes');
+
+  //   expect(res.body).toEqual('You touched the DB');
+  // });
+
+  
+  it('should return an array of motorcycle objects', async () => {
+    const expectArrObj = [{
+      id: expect.any(String),
+      manufacturer: 'GASGAS',
+      name: 'EC300',
+      cost: 9749,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/05_GasGas_EC-250.jpg'
+    },
+    {
+      id: expect.any(String),
+      manufacturer: 'KTM',
+      name: '300XC-W',
+      cost: 10499,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/09_KTM300-XC-W-TPI.jpg'
+    }];
+
     const res = await request(app)
       .get('/api/v1/two_strokes');
 
-    expect(res.body).toEqual('You touched the DB');
+    expect(res.body).toEqual(expectArrObj);
   });
 
-  it('it should return a string', async () => {
-    const expected = await TwoStroke.touch();
+  it('should return a motorcycle object with the matching id', async () => {
+    const expectObj = {
+      id: expect.any(String),
+      manufacturer: 'KTM',
+      name: '300XC-W',
+      cost: 10499,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/09_KTM300-XC-W-TPI.jpg'
+    };
 
-    expect(expected).toEqual('You touched the DB');
+    const res = await request(app)
+      .get('/api/v1/two_strokes/2');
+
+    expect(res.body).toEqual(expectObj);
   });
 
+  it('should insert and return a new motorcycle object', async () => {
+    const expectObj = {
+      id: expect.any(String),
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+    
+    const sendObj = {
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+
+    const res = await request(app)
+      .post('/api/v1/two_strokes/')
+      .send(sendObj);
+
+    expect(res.body).toEqual(expectObj);
+  });
 });
