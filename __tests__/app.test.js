@@ -13,17 +13,34 @@ describe('alchemy-app routes', () => {
     pool.end();
   });
 
-  it('it should return a string', async () => {
+  // it('it should return a string', async () => {
+  //   const res = await request(app)
+  //     .get('/api/v1/two_strokes');
+
+  //   expect(res.body).toEqual('You touched the DB');
+  // });
+
+  
+  it('should return an array of motorcycle objects', async () => {
+    const expectArrObj = [{
+      id: expect.any(String),
+      manufacturer: 'GASGAS',
+      name: 'EC300',
+      cost: 9749,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/05_GasGas_EC-250.jpg'
+    },
+    {
+      id: expect.any(String),
+      manufacturer: 'KTM',
+      name: '300XC-W',
+      cost: 10499,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/09_KTM300-XC-W-TPI.jpg'
+    }];
+
     const res = await request(app)
       .get('/api/v1/two_strokes');
 
-    expect(res.body).toEqual('You touched the DB');
-  });
-
-  it('it should return a string', async () => {
-    const expected = await TwoStroke.touch();
-
-    expect(expected).toEqual('You touched the DB');
+    expect(res.body).toEqual(expectArrObj);
   });
 
 });
