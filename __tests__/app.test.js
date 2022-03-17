@@ -104,4 +104,9 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual(expectObj);
   });
+
+  it('should delete a motorcycle object that matches the ID', async () => {
+    const res = await request(app)
+      .delete('/api/v1/two_strokes/1');
+  });
 });
