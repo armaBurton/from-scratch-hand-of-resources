@@ -50,7 +50,7 @@ describe('alchemy-app routes', () => {
       name: '300XC-W',
       cost: 10499,
       img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/09_KTM300-XC-W-TPI.jpg'
-    }
+    };
 
     const res = await request(app)
       .get('/api/v1/two_strokes/2');
@@ -58,4 +58,26 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expectObj);
   });
 
+  it('should insert and return a new motorcycle object', async () => {
+    const expectObj = {
+      id: expect.any(String),
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+    
+    const sendObj = {
+      manufacturer: 'Husqvarna',
+      name: 'TE300i(OFF-ROAD)',
+      cost: 10599,
+      img: 'https://dirtbikemagazine.com/wp-content/uploads/2021/09/06_HusqvarnaTE-300i.jpg'
+    };
+
+    const res = await request(app)
+      .post('/api/v1/two_strokes/')
+      .send(sendObj);
+
+    expect(res.body).toEqual(expectObj);
+  });
 });
