@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const FlightController = require('../lib/models/Flight-controller');
-const { response } = require('../lib/app');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
