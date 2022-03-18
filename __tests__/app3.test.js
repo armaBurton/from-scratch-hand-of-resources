@@ -13,6 +13,47 @@ describe('alchemy-app routes', () => {
     pool.end();
   });
 
+  it('it should create a new instance of a dragon', async () => {
+    const expected = {
+      id: expect.any(String),
+      age: 'Young',
+      color: 'Silver',
+      description: 'Large dragon, lawful good',
+      ac: 18,
+      hp: '16d10+80',
+      speed:['40 ft', 'fly 80 ft'],
+      stats:{
+        STR: '23(+6)',
+        DEX: '10(+0)',
+        CON: '21(+5)',
+        INT: '14(+2)',
+        WIS: '11(+0)',
+        CHA: '19(+4)'
+      }
+    };
+
+    const res = await request(app)
+      .post('/api/v1/dragons')
+      .send({
+        age: 'Young',
+        color: 'Silver',
+        description: 'Large dragon, lawful good',
+        ac: 18,
+        hp: '16d10+80',
+        speed:['40 ft', 'fly 80 ft'],
+        stats:{
+          STR: '23(+6)',
+          DEX: '10(+0)',
+          CON: '21(+5)',
+          INT: '14(+2)',
+          WIS: '11(+0)',
+          CHA: '19(+4)'
+        }
+      });
+    
+    expect(res.body).toEqual(expected);
+  });
+
   it('should return a list of all dragons', async () => {
     const expected = await Dragon.getAll();
 
