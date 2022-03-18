@@ -42,4 +42,35 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual(expected);
   });
+
+  it('should add and object to the DB', async () => {
+    const expected = {
+      id: expect.any(String),
+      manufacturer: 'Diatone',
+      stack_name: 'Diatone Mamba DJI F405 MK2 FC 55A Stack',
+      fc_name: 'Mamba DJI F405 MK2',
+      esc_name: 'DIATONE MAMBA F55 55A 128K ESC',
+      input_voltage: '3-6s',
+      mounting: ' 30.5mm,M3',
+      cost: '$93.99',
+      backordered: true,
+      img: 'https://cdn.getfpv.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/i/diatone_mamba_sack_dji_f405_55a_128k_escdji-mamba-stack-f405-55a-128k-front-low_res-width-1000px.jpg',
+    };
+
+    const res = await request(app)
+      .post('/api/v1/flight_controllers')
+      .send({
+        manufacturer: 'Diatone',
+        stack_name: 'Diatone Mamba DJI F405 MK2 FC 55A Stack',
+        fc_name: 'Mamba DJI F405 MK2',
+        esc_name: 'DIATONE MAMBA F55 55A 128K ESC',
+        input_voltage: '3-6s',
+        mounting: ' 30.5mm,M3',
+        cost: '$93.99',
+        backordered: true,
+        img: 'https://cdn.getfpv.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/i/diatone_mamba_sack_dji_f405_55a_128k_escdji-mamba-stack-f405-55a-128k-front-low_res-width-1000px.jpg'
+      });
+
+
+  });
 });
