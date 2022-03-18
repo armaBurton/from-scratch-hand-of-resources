@@ -88,4 +88,53 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expected);
   });
 
+  it('should update a dragon object that matches ID', async () => {
+    const expected = {
+      id: expect.any(String),
+      age:'Ancient',
+      color:'Blue',
+      description:'Gargantuan dragon, lawful evil',
+      ac:22,
+      hp:'26d20+208',
+      speed:['40 ft', 'fly 80 ft', 'swim 40 ft'],
+      stats:{
+        STR: '29(+9)',
+        DEX: '10(+0)',
+        CON: '27(+8)',
+        INT: '18(+4)',
+        WIS: '17(+3)',
+        CHA: '21(+5)'
+      }
+    };
+
+    const res = await request(app)
+      .patch('/api/v1/dragons/1')
+      .send({
+        age:'Ancient',
+        color:'Blue',
+        description:'Gargantuan dragon, lawful evil',
+        ac:22,
+        hp:'26d20+208',
+        speed:['40 ft', 'fly 80 ft', 'swim 40 ft'],
+        stats:{
+          STR: '29(+9)',
+          DEX: '10(+0)',
+          CON: '27(+8)',
+          INT: '18(+4)',
+          WIS: '17(+3)',
+          CHA: '21(+5)'
+        }
+      }); 
+
+    expect(res.body).toEqual(expected);
+  });
+
+  it('should delete a dragon that matches Id', async () => {
+    const res = await request(app)
+      .delete('/api/va/dragons/1');
+
+    if (!res[0]) return null;
+    ret
+  });
+
 });
