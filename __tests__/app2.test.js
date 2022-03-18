@@ -70,7 +70,7 @@ describe('alchemy-app routes', () => {
         backordered: true,
         img: 'https://cdn.getfpv.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/d/i/diatone_mamba_sack_dji_f405_55a_128k_escdji-mamba-stack-f405-55a-128k-front-low_res-width-1000px.jpg'
       });
-
-
+    
+    expect(res.body).toEqual(expected);
   });
 });
