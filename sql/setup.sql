@@ -2,6 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS two_strokes;
 DROP TABLE IF EXISTS flight_controllers;
+DROP TABLE IF EXISTS dragons;
 
 CREATE TABLE two_strokes (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -71,3 +72,44 @@ INSERT INTO
       false, 
       'https://cdn.getfpv.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/p/speedybee-mini-stack-35a_1_.jpg'
     );
+
+    CREATE TABLE dragons(
+      id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+      age TEXT NOT NULL,
+      color TEXT NOT NULL,
+      description TEXT NOT NULL,
+      ac INT NOT NULL,
+      hp TEXT NOT NULL,
+      speed TEXT[] NOT NULL,
+      stats JSON NOT NULL
+    );
+
+    INSERT INTO
+      dragons(
+        age,
+        color,
+        description,
+        ac,
+        hp,
+        speed,
+        stats
+      )
+    VALUES
+      (
+        'Adult',
+        'Blue',
+        'Huge dragon, lawful evil',
+        19,
+        '18d12+108',
+        ARRAY ['40 ft', 'burrow 30 ft', 'fly 80 ft'],
+        '{"STR": "25(+7)", "DEX": "10(+0)", "CON": "23(+6)", "INT": "16(+3)", "WIS": "15(+2)", "CHA": "19(+4)"}'
+      ),
+      (
+        'Ancient',
+        'Black',
+        'Gargantuan dragon, chaotic evil',
+        22,
+        '21d20+147',
+        ARRAY ['40 ft', 'fly 80 ft', 'swim 40 ft'],
+        '{"STR": "27(+8)", "DEX": "14(+2)", "CON": "25(+7)", "INT": "16(+3)", "WIS": "15(+2)", "CHA": "19(+4)"}'
+      );
