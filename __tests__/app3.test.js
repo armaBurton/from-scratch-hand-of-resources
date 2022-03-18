@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Dragon = require('../lib/models/Dragon');
+const { getById } = require('../lib/models/Dragon');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -130,11 +131,29 @@ describe('alchemy-app routes', () => {
   });
 
   it('should delete a dragon that matches Id', async () => {
-    const res = await request(app)
-      .delete('/api/va/dragons/1');
+    const expected = {
+      id: expect.any(String),
+      age:'Adult',
+      color:'Blue',
+      description:'Huge dragon, lawful evil',
+      ac:19,
+      hp:'18d12+108',
+      speed:['40 ft', 'burrow 30 ft', 'fly 80 ft'],
+      stats:{
+        STR: '25(+7)',
+        DEX: '10(+0)',
+        CON: '23(+6)',
+        INT: '16(+3)',
+        WIS: '15(+2)',
+        CHA: '19(+4)'
+      }
+    };
 
-    if (!res[0]) return null;
-    ret
+    const res = await request(app)
+      .delete('/api/v1/dragons/1');
+
+    expect(res.body).toEqual(expected);
+    expect(await Dragon.getById(1)).toBeNull;
   });
 
 });
