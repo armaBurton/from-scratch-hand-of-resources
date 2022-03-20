@@ -137,7 +137,7 @@ INSERT INTO hamburgers (
 )
 VALUES
   (
-    'Blue Cheese Prezel Burger with Bacon', 
+    'Blue Cheese Pretzel Burger with Bacon', 
     'Pretzel', 
     'Beef', 
     true, 
