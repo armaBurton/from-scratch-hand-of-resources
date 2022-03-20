@@ -63,6 +63,16 @@ describe('alchemy-app routes', () => {
     lab:[99, -68, 86],
   };
 
+  const updateObjReturn = {
+    id: expect.any(String),
+    css:'Chartreuse',
+    hex:'7FFF00',
+    rgb:[127, 255, 0],
+    cmyk:[50, 0, 100, 0],
+    hsb:[90, 100, 100],
+    lab:[99, -68, 86],
+  };
+
   const deletedColor = {
     id: expect.any(String),
     css:'Aqua',
@@ -101,6 +111,14 @@ describe('alchemy-app routes', () => {
       .send(uploadObj);
 
     expect(res.body).toEqual(uploadObjReturn);
+  });
+
+  it('should modify color object with matching id', async () => {
+    const res = await request(app)
+      .patch('/api/v1/colors/2')
+      .send(updateObj);
+
+    expect(res.body).toEqual(updateObjReturn);
   });
 
 });
