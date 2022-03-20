@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS two_strokes;
 DROP TABLE IF EXISTS flight_controllers;
 DROP TABLE IF EXISTS dragons;
 DROP TABLE IF EXISTS hamburgers;
+DROP TABLE IF EXISTS colors;
 
 CREATE TABLE two_strokes (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -154,3 +155,39 @@ VALUES
     '{"Onion", "Pickle"}',
     '{"Mayonnaise", "Coarse Mustard", "BBQ Sauce"}'
   );  
+
+CREATE TABLE colors (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  css TEXT NOT NULL,
+  hex TEXT NOT NULL,
+  rgb INT[] NOT NULL,
+  cmyk INT[] NOT NULL,
+  hsb INT[] NOT NULL,
+  lab INT[] NOT NULL
+);
+
+INSERT INTO colors (
+  css,
+  hex,
+  rgb,
+  cmyk,
+  hsb,
+  lab
+)
+VALUES
+  (
+    'Fuchsia', 
+    'FF00FF', 
+    '{255, 0, 255}',
+    '{0, 100, 0, 0}',
+    '{300, 100, 100}',
+    '{60, 98, -61}'
+  ),
+  (
+    'AQUA',
+    '00FFFF',
+    '{0, 255, 255}',
+    '{100, 0, 0, 0}',
+    '{180, 100, 100}',
+    '{91, -48, 14}'
+  );
