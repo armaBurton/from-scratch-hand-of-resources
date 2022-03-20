@@ -3,7 +3,6 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Color = require('../lib/models/Color');
-const { get } = require('express/lib/response');
 
 describe('alchemy-app routes', () => {
   const expectedArrayObj = [{
@@ -119,6 +118,16 @@ describe('alchemy-app routes', () => {
       .send(updateObj);
 
     expect(res.body).toEqual(updateObjReturn);
+  });
+
+  it('should delete a color object with matching id', async () => {
+    const res = await request(app)
+      .delete('/api/v1/colors/2');
+
+    console.log('|| res.body >', res.body);
+
+    expect(res.body).toEqual(deletedColor);
+    expect(await Color.getById(2)).toBeNull();
   });
 
 });
