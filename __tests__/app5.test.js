@@ -95,4 +95,12 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expectedObj1);
   });
 
+  it('should add a new object to the list array', async () => {
+    const res = await request(app)
+      .post('/api/v1/colors')
+      .send(uploadObj);
+
+    expect(res.body).toEqual(uploadObjReturn);
+  });
+
 });
