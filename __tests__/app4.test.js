@@ -39,6 +39,16 @@ describe('alchemy-app routes', () => {
     sauce: ['Mayonnaise', 'Coarse Mustard']
   };
 
+  const updateObj = {
+    bun:'Pretzel',
+    name:'Pineapple Teriyaki Burger with Ham',
+    patty:'Beef',
+    bacon: false,
+    cheese: '',
+    toppings: ['Onion', 'Pineapple', 'Ham'],
+    sauce: ['Mayonnaise', 'Teriyaki']
+  };
+
 
   const uploadObj = {
     bun:'Sesame',
@@ -48,6 +58,17 @@ describe('alchemy-app routes', () => {
     cheese: 'Cheddar',
     toppings: ['Onion', 'Pickled Jalapeno', 'Tomato', 'Lettuce'],
     sauce: ['Fry Sauce', 'Yellow Mustard']
+  };
+
+  const uploadObjReturn = {
+    id: expect.any(String),
+    bun:'Pretzel',
+    name:'Pineapple Teriyaki Burger with Ham',
+    patty:'Beef',
+    bacon: false,
+    cheese: '',
+    toppings: ['Onion', 'Pineapple', 'Ham'],
+    sauce: ['Mayonnaise', 'Teriyaki']
   };
 
   beforeEach(() => {
@@ -84,6 +105,14 @@ describe('alchemy-app routes', () => {
       .get('/api/v1/hamburgers/1');
 
     expect(res.body).toEqual(expectedObj1);
+  });
+
+  it('should modify a hamburger with the matching Id', async () => {
+    const res = await request(app)
+      .patch('/api/v1/hamburgers/1')
+      .send(updateObj);
+
+    expect(res.body).toEqual(uploadObjReturn);
   });
 
 });
