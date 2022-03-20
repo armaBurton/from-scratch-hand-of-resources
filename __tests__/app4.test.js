@@ -71,6 +71,17 @@ describe('alchemy-app routes', () => {
     sauce: ['Mayonnaise', 'Teriyaki']
   };
 
+  const deletedHamburger = {
+    id: expect.any(String),
+    bun:'Kaiser',
+    name:'Chicken Kaiser Burger with Provolone',
+    patty:'Chicken',
+    bacon: false,
+    cheese: 'Provolone',
+    toppings: ['Onion', 'Pickle'],
+    sauce: ['Mayonnaise', 'Coarse Mustard', 'BBQ Sauce']
+  };
+
   beforeEach(() => {
     return setup(pool);
   });
@@ -113,6 +124,14 @@ describe('alchemy-app routes', () => {
       .send(updateObj);
 
     expect(res.body).toEqual(uploadObjReturn);
+  });
+
+  it('should delete a hamburger with matching id', async() => {
+    const res = await request(app)
+      .delete('/api/v1/hamburgers/2');
+
+    expect(res.body).toEqual(deletedHamburger);
+    expect(await Hamburger.getById(2)).toBeNull();
   });
 
 });
