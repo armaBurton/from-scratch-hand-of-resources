@@ -88,4 +88,11 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expectedArrayObj);
   });
 
+  it('should return a color object matching an ID', async () => {
+    const res = await request(app)
+      .get('/api/v1/colors/1');
+
+    expect(res.body).toEqual(expectedObj1);
+  });
+
 });
