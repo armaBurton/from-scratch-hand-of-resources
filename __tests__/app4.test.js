@@ -5,7 +5,7 @@ const app = require('../lib/app');
 const Hamburger = require('../lib/models/Hamburger');
 
 describe('alchemy-app routes', () => {
-  const E=expectedArrayObj = [
+  const expectedArrayObj = [
     {
       id: expect.any(String),
       bun:'Pretzel',
